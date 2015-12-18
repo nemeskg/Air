@@ -21,5 +21,7 @@ public class Main {
                 AirportFinder.find(countryA);
                 AirportFinder.find(countryB);
 
+                AirportFinder.closeWriter();
+
     }
 }

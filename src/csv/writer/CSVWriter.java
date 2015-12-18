@@ -8,7 +8,7 @@ import java.io.IOException;
 
 public class CSVWriter {
 
-    private FileWriter writer;
+    private static FileWriter writer;
 
 
     /* Open the writer file, write header */
@@ -21,7 +21,7 @@ public class CSVWriter {
     }
 
     /* Write value into file, adding a "," */
-    public void write(String word) throws IOException
+    public static void write(String word) throws IOException
     {
         if (writer != null)
         {
@@ -31,13 +31,13 @@ public class CSVWriter {
     }
 
     /* Jump to new line for new values*/
-    public void writeLine() throws IOException{
+    public static void writeLine() throws IOException{
         writer.append('\n');
     }
 
 
     /* Close writer*/
-    public void closeWriter() throws IOException
+    public static void closeWriter() throws IOException
     {
             writer.flush();
             writer.close();

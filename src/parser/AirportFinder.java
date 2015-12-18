@@ -21,13 +21,16 @@ import java.util.Map;
 public class AirportFinder {
     private static boolean parsed = false;
     private static List<Map> maps;
-
+    private static CSVWriter writeCsv;
 
     /* Remove quotes from country code and country names */
     private static String removeQuotes(String quote){
         return quote.substring(1,quote.length()-1);
     }
 
+    public static void closeWriter() throws IOException{
+        writeCsv.closeWriter();
+    }
     private static List<Map> parse() {
 
         String[] csvFile = new String[3];
@@ -202,6 +205,8 @@ public class AirportFinder {
         if (!parsed) {
             maps = parse(); // 0.codetocountry 1.countrytocountry 2.airportmap 3.runwaymap
             AirportFinder.parsed = true;
+            /* Open file writer */
+            writeCsv = new CSVWriter();
         }
 
         Map<String, List<Airport>> airportMap = maps.get(2);
@@ -210,10 +215,6 @@ public class AirportFinder {
         Map<String, Country> codeToCountryMap = maps.get(0);
 
     try {
-
-        /* Open file writer */
-        CSVWriter writeCsv = new CSVWriter();
-
             Country country;
 
             if (countryInput.length() == 2)
@@ -264,8 +265,6 @@ public class AirportFinder {
                 return false;
             }
 
-
-        writeCsv.closeWriter();
     } catch (NullPointerException e) {
         e.printStackTrace();
         return false;
